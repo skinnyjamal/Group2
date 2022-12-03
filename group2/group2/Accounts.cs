@@ -8,16 +8,16 @@ namespace group2
 {
     public class Accounts
     {
-        public string name;
-        public string age;
-        public string address;
-        public int salary;
-        public string customerID;
+        public string name { get; set; }
+        public string age { get; set; }
+        public string address { get; set; }
+        public int salary { get; set; }
+        public string customerID { get; set; }
 
-        public int current = 0;
-        public bool spectial = false;
-        public bool savings = false;
-        public bool ISA = false;
+        public int current { get; set; }
+        public bool special = false;
+        public int savings { get; set; }
+        public int ISA { get; set; }
 
 
     }
