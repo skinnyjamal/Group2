@@ -9,7 +9,7 @@ namespace group2
     public class Accounts
     {
         public string name { get; set; }
-        public string age { get; set; }
+        public int age { get; set; }
         public string address { get; set; }
         public int salary { get; set; }
         public string customerID { get; set; }
