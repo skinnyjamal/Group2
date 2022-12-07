@@ -73,97 +73,65 @@ namespace group2
                     while (atmLoop == true)
                     {
                         //pin system
-
-
-                        Console.WriteLine("ATM");
                         Console.WriteLine();
-                        Console.WriteLine("(1) Balance");
-                        Console.WriteLine("(2) Withdraw");
-                        Console.WriteLine("(3) Deposit");
-                        Console.WriteLine("(4) Transfer");
-                        Console.WriteLine("(Q) QUIT");
+                        Console.WriteLine("----------------");
+                        Console.WriteLine("Enter 4 digit PIN");
+                        Console.WriteLine("----------------");
                         Console.WriteLine();
                         Console.Write("Input: ");
-                        string op = Console.ReadLine();
-
-                        switch (op.ToLower())
+                        int pinInput = Convert.ToInt32(Console.ReadLine());
+                        int count = 0;
+                        if (pinInput == findAccount.pin)
                         {
-                            case "1":
-                                Console.WriteLine();
-                                Console.WriteLine("----------------");
-                                Console.WriteLine("Balance: "+findAccount.current);
-                                Console.WriteLine("----------------");
-                                Console.WriteLine();
-                                break;
-                            case "2":
-                                Console.WriteLine();
-                                Console.WriteLine("----------------");
-                                Console.WriteLine("Balance: " + findAccount.current);
-                                Console.WriteLine("----------------");
-                                Console.WriteLine("Input withdraw ammount");
-                                Console.WriteLine("----------------");
-                                Console.WriteLine();
-                                Console.Write("Input: ");
-                                int withdraw = Convert.ToInt32(Console.ReadLine());
-                                findAccount.current -= withdraw;
-                                break;
-                            case "3":
-                                Console.WriteLine();
-                                Console.WriteLine("----------------");
-                                Console.WriteLine("Balance: " + findAccount.current);
-                                Console.WriteLine("----------------");
-                                Console.WriteLine("Input deposit ammount");
-                                Console.WriteLine("----------------");
-                                Console.WriteLine();
-                                Console.Write("Input: ");
-                                int deposit = Convert.ToInt32(Console.ReadLine());
-                                findAccount.current += deposit;
-                                break;
-                            case "4":
-                                Console.WriteLine();
-                                Console.WriteLine("----------------");
-                                Console.WriteLine("CHOOSE AN ACCOUNT");
-                                Console.WriteLine("(1) Current ");
-                                Console.WriteLine("(2) Savings");
-                                Console.WriteLine("(3) ISA ");
-                                Console.WriteLine("(Q) QUIT");
-                                Console.WriteLine("----------------");
-                                Console.WriteLine();
-                                Console.Write("Input: ");
-                                string chosenAcc1 = Console.ReadLine();
-                                int account1 = 0;
-                                int account2 = 0;
-                                bool transferLoop = true;
-                                while(transferLoop == true)
-                                {
-                                    switch (chosenAcc1.ToLower())
-                                    {
-                                        case "1":
-                                            findAccount.current = account1;
-                                            break;
-                                        case "2":
-                                            findAccount.savings = account1;
-                                            break;
-                                        case "3":
-                                            findAccount.ISA = account1;
-                                            break;
-                                        case "q":
-                                            atmLoop = false;
-                                            mainLoop = false;
-                                            transferLoop = false;
-                                            break;
-                                        default:
-                                            Console.WriteLine();
-                                            Console.WriteLine("wrong input try again");
-                                            Console.WriteLine();
-                                            break;
-                                    }
-                                }
-                                if (transferLoop == true)
-                                {
+
+                            Console.WriteLine("ATM");
+                            Console.WriteLine();
+                            Console.WriteLine("(1) Balance");
+                            Console.WriteLine("(2) Withdraw");
+                            Console.WriteLine("(3) Deposit");
+                            Console.WriteLine("(4) Transfer");
+                            Console.WriteLine("(Q) QUIT");
+                            Console.WriteLine();
+                            Console.Write("Input: ");
+                            string op = Console.ReadLine();
+
+                            switch (op.ToLower())
+                            {
+                                case "1":
                                     Console.WriteLine();
                                     Console.WriteLine("----------------");
-                                    Console.WriteLine("CHOOSE AN ACCOUNT TO TRNSFER TOO");
+                                    Console.WriteLine("Balance: " + findAccount.current);
+                                    Console.WriteLine("----------------");
+                                    Console.WriteLine();
+                                    break;
+                                case "2":
+                                    Console.WriteLine();
+                                    Console.WriteLine("----------------");
+                                    Console.WriteLine("Balance: " + findAccount.current);
+                                    Console.WriteLine("----------------");
+                                    Console.WriteLine("Input withdraw ammount");
+                                    Console.WriteLine("----------------");
+                                    Console.WriteLine();
+                                    Console.Write("Input: ");
+                                    int withdraw = Convert.ToInt32(Console.ReadLine());
+                                    findAccount.current -= withdraw;
+                                    break;
+                                case "3":
+                                    Console.WriteLine();
+                                    Console.WriteLine("----------------");
+                                    Console.WriteLine("Balance: " + findAccount.current);
+                                    Console.WriteLine("----------------");
+                                    Console.WriteLine("Input deposit ammount");
+                                    Console.WriteLine("----------------");
+                                    Console.WriteLine();
+                                    Console.Write("Input: ");
+                                    int deposit = Convert.ToInt32(Console.ReadLine());
+                                    findAccount.current += deposit;
+                                    break;
+                                case "4":
+                                    Console.WriteLine();
+                                    Console.WriteLine("----------------");
+                                    Console.WriteLine("CHOOSE AN ACCOUNT");
                                     Console.WriteLine("(1) Current ");
                                     Console.WriteLine("(2) Savings");
                                     Console.WriteLine("(3) ISA ");
@@ -171,22 +139,30 @@ namespace group2
                                     Console.WriteLine("----------------");
                                     Console.WriteLine();
                                     Console.Write("Input: ");
-                                    string chosenAcc2 = Console.ReadLine();
+                                    string chosenAcc1 = Console.ReadLine();
+                                    int account1 = 0;
+                                    int account2 = 0;
+                                    int ac1 = 0;
+                                    int ac2 = 0;
+                                    bool quit = false;
                                     switch (chosenAcc1.ToLower())
                                     {
                                         case "1":
-                                            findAccount.current = account2;
+                                            account1 = findAccount.current;
+                                            ac1 = 1;
                                             break;
                                         case "2":
-                                            findAccount.savings = account2;
+                                            account1 = findAccount.savings;
+                                            ac1 = 2;
                                             break;
                                         case "3":
-                                            findAccount.ISA = account2;
+                                            account1 = findAccount.ISA;
+                                            ac1 = 3;
                                             break;
                                         case "q":
                                             atmLoop = false;
                                             mainLoop = false;
-                                            transferLoop = false;
+                                            quit = true;
                                             break;
                                         default:
                                             Console.WriteLine();
@@ -194,28 +170,118 @@ namespace group2
                                             Console.WriteLine();
                                             break;
                                     }
-                                    if (transferLoop == true)
+
+                                    if (quit == false)
                                     {
                                         Console.WriteLine();
                                         Console.WriteLine("----------------");
-                                        Console.WriteLine("Choose amount to transfer ");
+                                        Console.WriteLine("CHOOSE AN ACCOUNT TO TRNSFER TOO");
+                                        Console.WriteLine("(1) Current ");
+                                        Console.WriteLine("(2) Savings");
+                                        Console.WriteLine("(3) ISA ");
+                                        Console.WriteLine("(Q) QUIT");
                                         Console.WriteLine("----------------");
                                         Console.WriteLine();
                                         Console.Write("Input: ");
-                                        string chosenAcc2 = Console.ReadLine()
-                                    }  
-                                }
-                                
-                                break;
-                            case "q":
-                                atmLoop = false;
-                                mainLoop = false;
-                                break;
-                            default: 
-                                Console.WriteLine();
-                                Console.WriteLine("wrong input try again");
-                                Console.WriteLine();
-                                break;
+                                        string chosenAcc2 = Console.ReadLine();
+                                        switch (chosenAcc2.ToLower())
+                                        {
+                                            case "1":
+                                                account2 = findAccount.current;
+                                                ac2 = 1;
+                                                break;
+                                            case "2":
+                                                account2 = findAccount.savings;
+                                                ac2 = 2;
+                                                break;
+                                            case "3":
+                                                account2 = findAccount.ISA;
+                                                ac2 = 3;
+                                                break;
+                                            case "q":
+                                                atmLoop = false;
+                                                mainLoop = false;
+                                                quit = true;
+                                                break;
+                                            default:
+                                                Console.WriteLine();
+                                                Console.WriteLine("wrong input try again");
+                                                Console.WriteLine();
+                                                break;
+                                        }
+                                        if (quit == false)
+                                        {
+                                            Console.WriteLine();
+                                            Console.WriteLine("----------------");
+                                            Console.WriteLine("Choose amount to transfer ");
+                                            Console.WriteLine("----------------");
+                                            Console.WriteLine();
+                                            Console.Write("Input: ");
+                                            int ammount = Convert.ToInt32(Console.ReadLine());
+                                            account1 -= ammount;
+                                            account2 += ammount;
+                                            switch (ac1)
+                                            {
+                                                case 1:
+                                                    findAccount.current = account1;
+                                                    break;
+                                                case 2:
+                                                    findAccount.savings = account1;
+                                                    break;
+                                                case 3:
+                                                    findAccount.ISA = account1;
+                                                    break;
+                                            }
+                                            switch (ac2)
+                                            {
+                                                case 1:
+                                                    findAccount.current = account2;
+                                                    break;
+                                                case 2:
+                                                    findAccount.savings = account2;
+                                                    break;
+                                                case 3:
+                                                    findAccount.ISA = account2;
+                                                    break;
+                                            }
+
+                                        }
+                                    }
+
+                                    break;
+                                case "q":
+                                    atmLoop = false;
+                                    mainLoop = false;
+                                    break;
+                                default:
+                                    Console.WriteLine();
+                                    Console.WriteLine("wrong input try again");
+                                    Console.WriteLine();
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            count++;
+                            int triesLeft = 3;
+                            triesLeft -= count;
+                            Console.WriteLine();
+                            Console.WriteLine("wrong PIN");
+                            Console.WriteLine("You have "+ triesLeft +" tries Left");
+                            Console.WriteLine();
+                        }
+                        if (count == 3)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            Console.WriteLine("INTRUDER DETECTED LOCKING ACCOUNT");
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            atmLoop = false;
+                            mainLoop = false;
+                            //take the card
+                            //Flag system for inruder
+                            //contact police
                         }
                     }
                 }
