@@ -12,13 +12,13 @@ namespace group2
         public int age { get; set; }
         public string address { get; set; }
         public int salary { get; set; }
-        public string customerID { get; set; }
+        public int customerID { get; set; }
 
         public int current { get; set; }
         public bool special = false;
         public int savings { get; set; }
         public int ISA { get; set; }
 
-
+        public int pin { get; set; }
     }
 }

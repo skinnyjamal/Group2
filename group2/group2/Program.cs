@@ -20,12 +20,16 @@ namespace group2
             example.salary = 30000;
             example.special = true;
             example.current = 230;
+            example.customerID = 101;
+            example.pin = 1234;
             accountsList.Add(example);
-            
+            Accounts findAccount = new Accounts();
+
             bool mainLoop = true;
             bool employeeLoop = true;
             bool atmLoop = true;
-            while (mainLoop = true)
+            bool l = true;
+            while (mainLoop == true)
             {
                 Console.WriteLine("CHOOSE A WNDOW");
                 Console.WriteLine("----------------");
@@ -38,17 +42,77 @@ namespace group2
                 string i = Console.ReadLine();
                 if (i == "1")
                 {
+                    //choose account
+                    while (l == true)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Instert Card (input customer id)");
+                        Console.WriteLine();
+                        Console.Write("Input: ");
+                        int idInput = Convert.ToInt32(Console.ReadLine());
+                        findAccount.customerID = idInput;
+                        foreach (Accounts account in accountsList)
+                        {
+                            if (findAccount.customerID == account.customerID)
+                            {
+                                findAccount = account;
+                                l = false;
+                            }
+                        }
+                        if ( l == true)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("----------------");
+                            Console.WriteLine("Please try again!");
+                            Console.WriteLine("----------------");
+                            Console.WriteLine();
+                        }
+                    }
                     while (atmLoop == true)
                     {
-                        
+                        //pin system
+
+
                         Console.WriteLine("ATM");
                         Console.WriteLine();
                         Console.WriteLine("(1) Balance");
                         Console.WriteLine("(2) Withdraw");
                         Console.WriteLine("(3) Deposit");
+                        Console.WriteLine("(4) Transfer");
                         Console.WriteLine("(Q) QUIT");
                         Console.WriteLine();
                         Console.Write("Input: ");
+                        string op = Console.ReadLine();
+
+                        switch (op.ToLower())
+                        {
+                            case "1":
+                                Console.WriteLine();
+                                Console.WriteLine("----------------");
+                                Console.WriteLine("Balance: "+findAccount.current);
+                                Console.WriteLine("----------------");
+                                Console.WriteLine();
+                                break;
+                            case "2":
+                                Console.WriteLine();
+                                Console.WriteLine("----------------");
+                                Console.WriteLine("Balance: " + findAccount.current);
+                                Console.WriteLine("----------------");
+                                Console.WriteLine("Input withdraw ammount");
+                                Console.WriteLine("----------------");
+                                Console.WriteLine();
+                                Console.Write("Input: ");
+                                int withdraw = Convert.ToInt32(Console.ReadLine());
+                                findAccount.current += withdraw;
+                                break;
+                            case "3":
+                                //deposit
+                                break;
+                            case "q":
+                                atmLoop = false;
+                                mainLoop = false;
+                                break;
+                        }
                     }
                 }
                 else if (i == "2")
@@ -109,6 +173,7 @@ namespace group2
                                 break;
                             case "q":
                                 employeeLoop = false;
+                                mainLoop = false;
                                 break;
                         }
 
@@ -135,7 +200,7 @@ namespace group2
 
                             Console.WriteLine();
                             Console.Write("Enter Acount Holder's Customer ID: ");   //Customer ID
-                            account.customerID = Console.ReadLine();
+                            account.customerID = Convert.ToInt32(Console.ReadLine());
 
                             if (account.salary >= 30000) { account.special = true; }
 
