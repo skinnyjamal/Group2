@@ -20,6 +20,8 @@ namespace group2
             example.salary = 30000;
             example.special = true;
             example.current = 230;
+            example.savings = 2000;
+            example.ISA = 11000;
             example.customerID = 101;
             example.pin = 1234;
             accountsList.Add(example);
@@ -103,20 +105,123 @@ namespace group2
                                 Console.WriteLine();
                                 Console.Write("Input: ");
                                 int withdraw = Convert.ToInt32(Console.ReadLine());
-                                findAccount.current += withdraw;
+                                findAccount.current -= withdraw;
                                 break;
                             case "3":
-                                //deposit
+                                Console.WriteLine();
+                                Console.WriteLine("----------------");
+                                Console.WriteLine("Balance: " + findAccount.current);
+                                Console.WriteLine("----------------");
+                                Console.WriteLine("Input deposit ammount");
+                                Console.WriteLine("----------------");
+                                Console.WriteLine();
+                                Console.Write("Input: ");
+                                int deposit = Convert.ToInt32(Console.ReadLine());
+                                findAccount.current += deposit;
+                                break;
+                            case "4":
+                                Console.WriteLine();
+                                Console.WriteLine("----------------");
+                                Console.WriteLine("CHOOSE AN ACCOUNT");
+                                Console.WriteLine("(1) Current ");
+                                Console.WriteLine("(2) Savings");
+                                Console.WriteLine("(3) ISA ");
+                                Console.WriteLine("(Q) QUIT");
+                                Console.WriteLine("----------------");
+                                Console.WriteLine();
+                                Console.Write("Input: ");
+                                string chosenAcc1 = Console.ReadLine();
+                                int account1 = 0;
+                                int account2 = 0;
+                                bool transferLoop = true;
+                                while(transferLoop == true)
+                                {
+                                    switch (chosenAcc1.ToLower())
+                                    {
+                                        case "1":
+                                            findAccount.current = account1;
+                                            break;
+                                        case "2":
+                                            findAccount.savings = account1;
+                                            break;
+                                        case "3":
+                                            findAccount.ISA = account1;
+                                            break;
+                                        case "q":
+                                            atmLoop = false;
+                                            mainLoop = false;
+                                            transferLoop = false;
+                                            break;
+                                        default:
+                                            Console.WriteLine();
+                                            Console.WriteLine("wrong input try again");
+                                            Console.WriteLine();
+                                            break;
+                                    }
+                                }
+                                if (transferLoop == true)
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine("----------------");
+                                    Console.WriteLine("CHOOSE AN ACCOUNT TO TRNSFER TOO");
+                                    Console.WriteLine("(1) Current ");
+                                    Console.WriteLine("(2) Savings");
+                                    Console.WriteLine("(3) ISA ");
+                                    Console.WriteLine("(Q) QUIT");
+                                    Console.WriteLine("----------------");
+                                    Console.WriteLine();
+                                    Console.Write("Input: ");
+                                    string chosenAcc2 = Console.ReadLine();
+                                    switch (chosenAcc1.ToLower())
+                                    {
+                                        case "1":
+                                            findAccount.current = account2;
+                                            break;
+                                        case "2":
+                                            findAccount.savings = account2;
+                                            break;
+                                        case "3":
+                                            findAccount.ISA = account2;
+                                            break;
+                                        case "q":
+                                            atmLoop = false;
+                                            mainLoop = false;
+                                            transferLoop = false;
+                                            break;
+                                        default:
+                                            Console.WriteLine();
+                                            Console.WriteLine("wrong input try again");
+                                            Console.WriteLine();
+                                            break;
+                                    }
+                                    if (transferLoop == true)
+                                    {
+                                        Console.WriteLine();
+                                        Console.WriteLine("----------------");
+                                        Console.WriteLine("Choose amount to transfer ");
+                                        Console.WriteLine("----------------");
+                                        Console.WriteLine();
+                                        Console.Write("Input: ");
+                                        string chosenAcc2 = Console.ReadLine()
+                                    }  
+                                }
+                                
                                 break;
                             case "q":
                                 atmLoop = false;
                                 mainLoop = false;
                                 break;
+                            default: 
+                                Console.WriteLine();
+                                Console.WriteLine("wrong input try again");
+                                Console.WriteLine();
+                                break;
                         }
                     }
                 }
                 else if (i == "2")
-                {
+                {   
+                    //
                     while (employeeLoop == true)
                     {
 
