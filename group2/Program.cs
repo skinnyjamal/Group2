@@ -1,85 +1,90 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
+﻿using System;
 
-namespace EmployeeConsoleMenu
+public class OverdraftAccount
 {
-    class Program
+    private decimal balance;
+    private decimal overdraftLimit;
+
+    public OverdraftAccount(decimal initialBalance, decimal initialOverdraftLimit)
     {
-        static void Main(string[] args)
+        balance = initialBalance;
+        overdraftLimit = initialOverdraftLimit;
+    }
+
+    public void Deposit(decimal amount)
+    {
+        balance += amount;
+    }
+
+    public void Withdraw(decimal amount)
+    {
+        if (balance - amount >= -overdraftLimit)
         {
-            // Create a list of customers.
-            var customers = new List<Customer>();
-
-            // Display the main menu.
-            int option = 0;
-            while (option != 3)
-            {
-                Console.Clear();
-                Console.WriteLine("Employee Console Menu");
-                Console.WriteLine("----------------------");
-                Console.WriteLine("1. Create Customer");
-                Console.WriteLine("----------------------");
-                Console.WriteLine("2. View Customer Information");
-                Console.WriteLine("----------------------");
-                Console.WriteLine("3.Set overdrafts");
-                Console.WriteLine("----------------------");
-                Console.WriteLine("4. Save and Exit");
-                Console.WriteLine("----------------------");
-                Console.Write("Enter option: ");
-             
-
-                // Handle the user's menu choice.
-                option = int.Parse(Console.ReadLine());
-                if (option == 1)
-                {
-                    // Create a new customer.
-                    Console.Write("Enter name: ");
-                    string name = Console.ReadLine();
-                    Console.Write("Enter email: ");
-                    string email = Console.ReadLine();
-                    Console.Write("Enter Address: ");
-                    string address = Console.ReadLine();
-                    Console.Write("Enter Salary: ");
-                    string salary = Console.ReadLine();
-                    Console.Write("Enter CustomerID: ");
-                    string customerID = Console.ReadLine();
-                    customers.Add(new Customer { Name = name, Email = email, Address = address, Salary = salary, CustomerID = customerID });
-                }
-
-
-                else if (option == 2)
-                {
-                    // View customer information.
-                    Console.WriteLine("Customers:");
-                    foreach (var customer in customers)
-                    {
-                        Console.WriteLine($"Name    - {customer.Name}");
-                        Console.WriteLine($"Email   - ({customer.Email})");
-                        Console.WriteLine($"Address - {customer.Address}");
-                        Console.WriteLine($"Salary  - {customer.Salary}");
-                        Console.WriteLine($"CustomerID - {customer.CustomerID}");
-
-
-
-
-                    }
-
-
-                    Console.WriteLine("Press enter to continue...");
-                    Console.ReadLine();
-                }
-            }
-
-            // Save the customers to a JSON file.
-            string json = JsonConvert.SerializeObject(customers);
-            File.WriteAllText("CustomersData.json", json);
+            balance -= amount;
+        }
+        else
+        {
+            throw new Exception("Cannot withdraw amount, it would exceed overdraft limit.");
         }
     }
 
+    public decimal GetBalance()
+    {
+        return balance;
+    }
 
-
+    public decimal GetOverdraftLimit()
+    {
+        return overdraftLimit;
+    }
 }
-;
+
+public class Program
+{
+    public static void Main()
+    {
+        OverdraftAccount account = new OverdraftAccount(100, 50);
+
+        while (true)
+        {
+            Console.WriteLine("1. Check balance");
+            Console.WriteLine("2. Deposit");
+            Console.WriteLine("3. Withdraw");
+            Console.WriteLine("4. Quit");
+            Console.Write("Enter your choice: ");
+
+            int choice = int.Parse(Console.ReadLine());
+
+            if (choice == 1)
+            {
+                Console.WriteLine($"Your balance is ${account.GetBalance()}");
+            }
+            else if (choice == 2)
+            {
+                Console.Write("Enter amount to deposit: ");
+                decimal amount = decimal.Parse(Console.ReadLine());
+                account.Deposit(amount);
+                Console.WriteLine("Deposit successful");
+            }
+            else if (choice == 3)
+            {
+                Console.Write("Enter amount to withdraw: ");
+                decimal amount = decimal.Parse(Console.ReadLine());
+
+                try
+                {
+                    account.Withdraw(amount);
+                    Console.WriteLine("Withdrawal successful");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            else if (choice == 4)
+            {
+                break;
+            }
+        }
+    }
+}
