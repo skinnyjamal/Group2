@@ -31,6 +31,7 @@ namespace group2
             bool employeeLoop = true;
             bool atmLoop = true;
             bool l = true;
+            int count = 0;
             while (mainLoop == true)
             {
                 Console.WriteLine("CHOOSE A WNDOW");
@@ -80,7 +81,6 @@ namespace group2
                         Console.WriteLine();
                         Console.Write("Input: ");
                         int pinInput = Convert.ToInt32(Console.ReadLine());
-                        int count = 0;
                         if (pinInput == findAccount.pin)
                         {
 
